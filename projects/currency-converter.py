@@ -36,8 +36,48 @@ def exchange_rate(currency1, currency2):
     print(f" {currency1} 1 = {currency2} {rate}")
     return rate
 
-# data = get_currencies()
-# print_currencies(data)
-rate = exchange_rate("USD", "ZWL")
+def convert(currency1, currency2, amount):
+    rate = exchange_rate(currency1, currency2)
+    if rate is None:
+        return
+    
+    try:
+        amount = float(amount)
+    except:
+        print("Invalid Amount")
+        return
 
+    converted_amount = rate * amount
+    print(f"{currency1} {amount}  = {currency2} {converted_amount}")
+    return converted_amount
 
+def main():
+    currencies = get_currencies()
+
+    print("Welcome to currency converter!")
+    print("List - lists the different currencies")
+    print("Convert - convert from one currency to another")
+    print("Rate - get the exchange rate of two currencies")
+    print()
+
+    while True:
+        option = input("Enter your option (q to quit): ").lower()
+
+        if option == "q": 
+            break
+        elif option == "list":
+            print_currencies(currencies)
+        elif option == "convert":
+            currency1 = input("Enter a base currency:  ").upper()
+            amount = input(f"Enter an amount in {currency1}: ")
+            currency2 = input("Enter a currency to convert to: ").upper()
+            convert(currency1, currency2, amount)
+
+        elif option == "rate":
+            currency1 = input("Enter a base currency: ").upper()
+            currency2 = input("Enter a currency to convert to: ").upper()
+            exchange_rate(currency1, currency2)
+        else:
+            print("Invalid Option")
+
+main()
