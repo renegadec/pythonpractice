@@ -113,7 +113,8 @@ class Player(Ship):
                 for obj in objs:
                     if laser.collision(obj):
                         objs.remove(obj)
-                        self.lasers.remove(laser)
+                        if laser in self.lasers:
+                            self.lasers.remove(laser)
     
     def draw(self, window):
         super().draw(window)
@@ -244,7 +245,8 @@ def main():
             
             if collide(enemy, player):
                 player.health -= 10
-                enemies.remove(enemy)
+                if enemy in enemies:
+                    enemies.remove(enemy)
 
         player.move_lasers(-laser_vel, enemies)
 
