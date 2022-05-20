@@ -1,0 +1,9 @@
+../.DS_Store
+
+__pycache__/
+
+.DS_Store
+        
+key.key
+
+passwords.txt
